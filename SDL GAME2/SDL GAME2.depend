@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1740738556 source:c:\users\asus\onedrive\desktop\sdl game2\main.cpp
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+	<memory>
+

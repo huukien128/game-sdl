@@ -1,9 +1,10 @@
+#include <SDL.h>
 #include "Game.h"
 
 int main(int argc, char* argv[]) {
     Game game;
 
-    if (!game.init("Space Shooter", 800, 600)) {
+    if (!game.init("SDL Game", 800, 600)) {
         return -1;
     }
 

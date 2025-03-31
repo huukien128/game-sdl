@@ -1,11 +1,28 @@
 # depslib dependency file v1.0
-1743410674 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.cpp
+1743435194 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.cpp
 	"Game.h"
+	<cstdlib>
+	<SDL_image.h>
 
-1743410674 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.h
+1743435138 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.h
 	<SDL.h>
-	<iostream>
+	<vector>
+	"Player.h"
+	"Enemy.h"
 
-1743391740 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\main.cpp
+1743434511 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\main.cpp
+	<SDL.h>
 	"Game.h"
+
+1743434901 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.h
+	<SDL.h>
+
+1743435273 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.cpp
+	"Enemy.h"
+
+1743435002 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.cpp
+	"Player.h"
+
+1743434901 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.h
+	<SDL.h>
 

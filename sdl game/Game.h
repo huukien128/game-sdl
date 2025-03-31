@@ -2,27 +2,28 @@
 #define GAME_H
 
 #include <SDL.h>
-#include <iostream>
+#include <vector>
+#include "Player.h"
+#include "Enemy.h"
 
 class Game {
 public:
     Game();
     ~Game();
-
     bool init(const char* title, int width, int height);
     void handleEvents();
     void update();
     void render();
     void clean();
-    bool isRunning() const { return running; }
+    bool isRunning();
 
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;
+    SDL_Texture* backgroundTexture;  // Biến lưu background
     bool running;
-
-    SDL_Rect playerRect; // Tàu vũ trụ
-    int speed; // Tốc độ tàu
+    Player player;
+    std::vector<Enemy*> enemies;
 };
 
 #endif // GAME_H

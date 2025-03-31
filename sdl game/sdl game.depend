@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1743382083 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.cpp
+	"Game.h"
+	<iostream>
+
+1743382083 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.h
+	<SDL.h>
+
+1743382083 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\main.cpp
+	"Game.h"
+

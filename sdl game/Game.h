@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SDL.h>
+#include <iostream>
 
 class Game {
 public:
@@ -13,14 +14,15 @@ public:
     void update();
     void render();
     void clean();
-
     bool isRunning() const { return running; }
 
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;
     bool running;
+
+    SDL_Rect playerRect; // Tàu vũ trụ
+    int speed; // Tốc độ tàu
 };
 
-#endif
-
+#endif // GAME_H

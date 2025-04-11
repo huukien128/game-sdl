@@ -2,6 +2,8 @@
 #define ENEMY_H
 
 #include <SDL.h>
+#include <vector>
+#include "Bomb.h"
 
 class Enemy {
 public:
@@ -9,12 +11,20 @@ public:
     void update();
     void render(SDL_Renderer* renderer);
     void resetPosition();
-    SDL_Rect getRect();
+    void reverseDirection();
+    SDL_Rect getRect() const;
+
+    void dropBomb();
+    std::vector<Bomb*>& getBombs();
+    void clearBombs();
 
 private:
     SDL_Renderer* renderer;
-    int speed;
+    SDL_Texture* texture;
     SDL_Rect rect;
+    int speed;
+    int direction;
+    std::vector<Bomb*> bombs;
 };
 
-#endif // ENEMY_H
+#endif

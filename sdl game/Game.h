@@ -20,10 +20,11 @@ public:
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;
-    SDL_Texture* backgroundTexture;  // Biến lưu background
+    SDL_Texture* backgroundTexture;
     bool running;
-    Player player;
+    Player* player;
     std::vector<Enemy*> enemies;
+
 };
 
-#endif // GAME_H
+#endif

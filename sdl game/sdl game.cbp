@@ -32,12 +32,18 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Bomb.cpp" />
+		<Unit filename="Bomb.h" />
+		<Unit filename="Bullet.cpp" />
+		<Unit filename="Bullet.h" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.h" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
+		<Unit filename="TextureManager.cpp" />
+		<Unit filename="TextureManager.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

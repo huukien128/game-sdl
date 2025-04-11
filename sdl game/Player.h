@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include <SDL.h>
+#include <vector>
+#include "Bullet.h"
 
 class Player {
 public:
@@ -9,13 +11,17 @@ public:
     void handleInput(const SDL_Event& event);
     void update();
     void render(SDL_Renderer* renderer);
-    void resetPosition();
-    SDL_Rect getRect();
+    void fire();
+    SDL_Rect getRect() const;
+    std::vector<Bullet*>& getBullets();
+    void removeBullet(Bullet* bullet);
 
 private:
     SDL_Renderer* renderer;
-    int speed;
+    SDL_Texture* texture;
     SDL_Rect rect;
+    int speed;
+    std::vector<Bullet*> bullets;
 };
 
-#endif // PLAYER_H
+#endif

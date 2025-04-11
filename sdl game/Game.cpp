@@ -1,37 +1,29 @@
 #include "Game.h"
+#include "TextureManager.h"
+#include <iostream>
 #include <cstdlib>
-#include <SDL_image.h>  // Để sử dụng IMG_Load
+#include<SDL_image.h>
 
-Game::Game() : window(nullptr), renderer(nullptr), backgroundTexture(nullptr), running(false), player(renderer) {}
+Game::Game() : window(nullptr), renderer(nullptr), backgroundTexture(nullptr), running(false), player(nullptr) {}
 
 Game::~Game() {
     clean();
 }
 
 bool Game::init(const char* title, int width, int height) {
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-        return false;
-    }
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) return false;
+    if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG))) return false;
 
-    window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
-    if (!window) {
-        return false;
-    }
-
+    window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if (!renderer) {
-        return false;
-    }
 
-    // Tải hình nền
-    backgroundTexture = IMG_LoadTexture(renderer, "image/bgr.jpg");
-    if (!backgroundTexture) {
-        return false;  // Kiểm tra nếu không tải được hình ảnh
-    }
+    backgroundTexture = TextureManager::LoadTexture(renderer, "image/bgr.jpg");
+    player = new Player(renderer);
 
-    // Tạo 5 máy bay địch
-    for (int i = 0; i < 5; ++i) {
-        enemies.push_back(new Enemy(renderer, rand() % 750, rand() % 500 - 600));
+    for (int i = 0; i < 10; ++i) {
+        int x = rand() % 500 + 150;
+        int y = rand() % 200;
+        enemies.push_back(new Enemy(renderer, x, y));
     }
 
     running = true;
@@ -41,39 +33,45 @@ bool Game::init(const char* title, int width, int height) {
 void Game::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
-            running = false;
-        }
-        player.handleInput(event);
+        if (event.type == SDL_QUIT) running = false;
+        player->handleInput(event);
     }
 }
 
 void Game::update() {
-    player.update();
+    player->update();
 
-    // Kiểm tra va chạm với máy bay địch
-    SDL_Rect playerRect = player.getRect();
     for (Enemy* enemy : enemies) {
-        SDL_Rect enemyRect = enemy->getRect();
-        if (SDL_HasIntersection(&playerRect, &enemyRect)) {
-            player.resetPosition();
-            enemy->resetPosition();
+        if (rand() % 10000 < 25) enemy->dropBomb();
+        enemy->update();
+
+        for (Bomb* bomb : enemy->getBombs()) {
+                SDL_Rect playerRect = player->getRect();
+                SDL_Rect bombRect = bomb->getRect();
+          if (SDL_HasIntersection(&playerRect, &bombRect)) {
+                std::cout << "Player destroyed! Game Over!" << std::endl;
+                running = false;
+            }
         }
     }
 
-    // Cập nhật máy bay địch
-    for (Enemy* enemy : enemies) {
-        enemy->update();
+    for (Bullet* bullet : player->getBullets()) {
+        for (Enemy* enemy : enemies) {
+                SDL_Rect bulletRect = bullet->getRect();
+                SDL_Rect enemyRect = enemy->getRect();
+           if (SDL_HasIntersection(&bulletRect, &enemyRect)) {
+                player->removeBullet(bullet);
+                enemy->resetPosition();
+                break;
+            }
+        }
     }
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
-
-    // Vẽ nền
     SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
-
-    player.render(renderer);
+    player->render(renderer);
 
     for (Enemy* enemy : enemies) {
         enemy->render(renderer);
@@ -83,15 +81,16 @@ void Game::render() {
 }
 
 void Game::clean() {
-    SDL_DestroyTexture(backgroundTexture);  // Hủy texture của background
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-
-    // Xóa các đối tượng enemy
     for (Enemy* enemy : enemies) {
+        enemy->clearBombs();
         delete enemy;
     }
+    enemies.clear();
 
+    delete player;
+    SDL_DestroyTexture(backgroundTexture);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
     SDL_Quit();
 }
 

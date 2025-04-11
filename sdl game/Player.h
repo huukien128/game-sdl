@@ -22,6 +22,7 @@ private:
     SDL_Rect rect;
     int speed;
     std::vector<Bullet*> bullets;
+
 };
 
 #endif

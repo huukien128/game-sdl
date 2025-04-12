@@ -3,7 +3,7 @@
 #include <algorithm>
 
 Player::Player(SDL_Renderer* renderer)
-    : renderer(renderer), rect{300, 500, 80, 80}, speed(15) {
+    : renderer(renderer), rect{300, 500, 75, 75}, speed(80) {
     texture = TextureManager::LoadTexture(renderer, "image/player.png");
 }
 
@@ -45,7 +45,7 @@ void Player::render(SDL_Renderer* renderer) {
 }
 
 void Player::fire() {
-    bullets.push_back(new Bullet(renderer, rect.x + rect.w / 2 , rect.y));
+    bullets.push_back(new Bullet(renderer, rect.x + rect.w/5.5 , rect.y));
 }
 
 SDL_Rect Player::getRect() const {

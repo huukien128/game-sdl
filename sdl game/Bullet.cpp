@@ -4,7 +4,7 @@
 Bullet::Bullet(SDL_Renderer* renderer, int x, int y)
     : renderer(renderer), speed(10) {
     texture = TextureManager::LoadTexture(renderer, "image/bullet.png");
-    rect = {x, y, 30, 30};
+    rect = {x, y, 50, 50};
 }
 
 void Bullet::update() {

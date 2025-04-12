@@ -34,6 +34,8 @@ private:
     SDL_Rect highScoreRect;
     void loadHighScore();
     void saveHighScore();
+    TTF_Font* gameOverFont;
+    bool isGameOver = false;
 
 };
 

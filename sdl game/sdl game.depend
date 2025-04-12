@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1744349607 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.cpp
+1744470530 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.cpp
 	"Game.h"
 	"TextureManager.h"
 	<iostream>
@@ -8,7 +8,7 @@
 	"FontManager.h"
 	<fstream>
 
-1744348961 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.h
+1744469372 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.h
 	<SDL.h>
 	<vector>
 	"Player.h"
@@ -23,13 +23,13 @@
 	<vector>
 	"Bullet.h"
 
-1744332198 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.cpp
+1744450005 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.cpp
 	"Enemy.h"
 	"TextureManager.h"
 	<cstdlib>
 	<algorithm>
 
-1744337507 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.cpp
+1744451670 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.cpp
 	"Player.h"
 	"TextureManager.h"
 	<algorithm>
@@ -39,7 +39,7 @@
 	<vector>
 	"Bomb.h"
 
-1744350167 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bomb.cpp
+1744451209 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bomb.cpp
 	"Bomb.h"
 	"TextureManager.h"
 
@@ -50,7 +50,7 @@
 	<SDL.h>
 	<string>
 
-1744337578 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bullet.cpp
+1744451186 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bullet.cpp
 	"Bullet.h"
 	"TextureManager.h"
 
@@ -70,4 +70,14 @@
 	<SDL_ttf.h>
 	<SDL.h>
 	<string>
+
+1744471659 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\soundmanager.cpp
+	"SoundManager.h"
+	<iostream>
+	<map>
+
+1744471676 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\soundmanager.h
+	<SDL_mixer.h>
+	<string>
+	<map>
 

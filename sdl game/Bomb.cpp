@@ -2,9 +2,9 @@
 #include "TextureManager.h"
 
 Bomb::Bomb(SDL_Renderer* renderer, int x, int y)
-    : renderer(renderer), speed(4) {
+    : renderer(renderer), speed(6) {
     texture = TextureManager::LoadTexture(renderer, "image/bomb.png");
-    rect = {x, y, 10, 20};
+    rect = {x, y, 25, 30 };
 }
 
 void Bomb::update() {

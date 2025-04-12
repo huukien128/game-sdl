@@ -20,22 +20,18 @@ bool Game::init(const char* title, int width, int height) {
      loadHighScore();
 
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC);
 
-    backgroundTexture = TextureManager::LoadTexture(renderer, "image/bgr.jpg");
+    backgroundTexture = TextureManager::LoadTexture(renderer, "image/bgr2.png");
     player = new Player(renderer);
 
     for (int i = 0; i < 10; ++i) {
-        int x = rand() % 500 + 150;
+        int x = rand() % 650;
         int y = rand() % 200;
         enemies.push_back(new Enemy(renderer, x, y));
     }
-    font = FontManager::LoadFont("Font/font.ttf", 24);
-    if (!font) {
-    std::cerr << "Failed to load font.\n";
-    return false;
-    }
-
+    font = FontManager::LoadFont("Font/font.ttf", 15);
+    gameOverFont = FontManager::LoadFont("Font/font2.ttf", 48);
     running = true;
     return true;
 }
@@ -52,7 +48,7 @@ void Game::update() {
     player->update();
 
     for (Enemy* enemy : enemies) {
-        if (rand() % 10000 < 25) enemy->dropBomb();
+        if (rand() % 10000 < 23) enemy->dropBomb();
         enemy->update();
 
         for (Bomb* bomb : enemy->getBombs()) {
@@ -60,6 +56,7 @@ void Game::update() {
                 SDL_Rect bombRect = bomb->getRect();
           if (SDL_HasIntersection(&playerRect, &bombRect)) {
                 std::cout << "Player destroyed! Game Over!" << std::endl;
+                isGameOver = true;
                 running = false;
             }
         }
@@ -90,24 +87,43 @@ void Game::render() {
     for (Enemy* enemy : enemies) {
         enemy->render(renderer);
     }
+
   std::string scoreText = "Score: " + std::to_string(score);
   std::string highScoreText = "High Score: " + std::to_string(highScore);
   if (scoreTexture) SDL_DestroyTexture(scoreTexture);
   if (highScoreTexture) SDL_DestroyTexture(highScoreTexture);
   SDL_Color white = {255, 255, 255, 255};
-  scoreTexture = FontManager::RenderText(scoreText, white, font, renderer);
-  highScoreTexture = FontManager::RenderText(highScoreText, white, font, renderer);
-   scoreRect = {20, 10, 0, 0};
-   highScoreRect = {20, 40, 0, 0};
+  SDL_Color red = {255, 0, 0, 255};
 
+  scoreTexture = FontManager::RenderText(scoreText, white, font, renderer);
+  scoreRect = {20, 10, 0, 0};
   SDL_QueryTexture(scoreTexture, nullptr, nullptr, &scoreRect.w, &scoreRect.h);
-  SDL_QueryTexture(highScoreTexture, nullptr, nullptr, &highScoreRect.w, &highScoreRect.h);
-  if (scoreTexture) {
+
+    if (scoreTexture) {
     SDL_RenderCopy(renderer, scoreTexture, nullptr, &scoreRect);
 }
-  if (highScoreTexture) {
+
+  highScoreTexture = FontManager::RenderText(highScoreText, red , font, renderer);
+  highScoreRect = {20, 40, 0, 0};
+  SDL_QueryTexture(highScoreTexture, nullptr, nullptr, &highScoreRect.w, &highScoreRect.h);
+
+   if (highScoreTexture) {
     SDL_RenderCopy(renderer, highScoreTexture, nullptr, &highScoreRect);
 }
+
+  if (isGameOver) {
+    SDL_Texture* gameOverTexture = FontManager::RenderText("GAME OVER", red, gameOverFont, renderer);
+        SDL_Rect gameOverRect={350,300,0,0};
+        SDL_QueryTexture(gameOverTexture, nullptr, nullptr, &gameOverRect.w, &gameOverRect.h);
+        SDL_RenderCopy(renderer, gameOverTexture, nullptr, &gameOverRect);
+        SDL_DestroyTexture(gameOverTexture);
+}
+
+if (isGameOver) {
+    SDL_RenderPresent(renderer);
+    SDL_Delay(2000);
+}
+
 
     SDL_RenderPresent(renderer);
 }

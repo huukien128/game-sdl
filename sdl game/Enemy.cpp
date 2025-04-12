@@ -5,8 +5,8 @@
 
 Enemy::Enemy(SDL_Renderer* renderer, int x, int y)
     : renderer(renderer), speed(3), direction(1) {
-    texture = TextureManager::LoadTexture(renderer, "image/enemy.png");
-    rect = {x, y, 50, 50};
+    texture = TextureManager::LoadTexture(renderer, "image/enemy2.png");
+    rect = {x, y, 80, 80};
 }
 
 void Enemy::update() {

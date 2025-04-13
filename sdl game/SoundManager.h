@@ -7,20 +7,23 @@
 
 class SoundManager {
 public:
-    static bool Init();
-    static void Clean();
+    static SoundManager& getInstance();
 
-    static bool LoadMusic(const std::string& fileName);
-    static void PlayMusic(int loops = -1);
-    static void StopMusic();
+    bool loadMusic(const std::string& id, const std::string& fileName);
+    void playMusic(const std::string& id, int loops = -1);
+    bool loadSound(const std::string& id, const std::string& fileName);
+    void playSound(const std::string& id);
 
-    static bool LoadEffect(const std::string& id, const std::string& fileName);
-    static void PlayEffect(const std::string& id);
+    void stopMusic();
+    void clean();
 
 private:
-    static Mix_Music* music;
-    static std::map<std::string, Mix_Chunk*> effects;
+    SoundManager() {}
+    ~SoundManager() {}
+
+    std::map<std::string, Mix_Music*> musicMap;
+    std::map<std::string, Mix_Chunk*> soundMap;
+
 };
 
 #endif
-

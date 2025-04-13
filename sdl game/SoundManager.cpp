@@ -1,62 +1,55 @@
 #include "SoundManager.h"
 #include <iostream>
-#include <map>
 
-Mix_Music* SoundManager::music = nullptr;
-std::map<std::string, Mix_Chunk*> SoundManager::effects;
-
-bool SoundManager::Init() {
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-        std::cerr << "SDL_mixer init error: " << Mix_GetError() << std::endl;
-        return false;
-    }
-    return true;
+SoundManager& SoundManager::getInstance() {
+    static SoundManager instance;
+    return instance;
 }
 
-void SoundManager::Clean() {
-    if (music) {
-        Mix_FreeMusic(music);
-        music = nullptr;
-    }
-
-    for (auto& effect : effects) {
-        Mix_FreeChunk(effect.second);
-    }
-    effects.clear();
-
-    Mix_CloseAudio();
-}
-
-bool SoundManager::LoadMusic(const std::string& fileName) {
-    music = Mix_LoadMUS(fileName.c_str());
+bool SoundManager::loadMusic(const std::string& id, const std::string& fileName) {
+    Mix_Music* music = Mix_LoadMUS(fileName.c_str());
     if (!music) {
-        std::cerr << "Failed to load music: " << Mix_GetError() << std::endl;
+        std::cout << "Failed to load music " << fileName << " Error: " << Mix_GetError() << std::endl;
         return false;
     }
+    musicMap[id] = music;
     return true;
 }
 
-void SoundManager::PlayMusic(int loops) {
-    if (music) Mix_PlayMusic(music, loops);
+void SoundManager::playMusic(const std::string& id, int loops) {
+    if (musicMap.find(id) != musicMap.end()) {
+        Mix_PlayMusic(musicMap[id], loops);
+    }
+}
+bool SoundManager::loadSound(const std::string& id, const std::string& fileName) {
+    Mix_Chunk* sound = Mix_LoadWAV(fileName.c_str());
+    if (!sound) {
+        std::cout << "Failed to load sound " << fileName << " Error: " << Mix_GetError() << std::endl;
+        return false;
+    }
+    soundMap[id] = sound;
+    return true;
+}
+void SoundManager::playSound(const std::string& id) {
+    if (soundMap.find(id) != soundMap.end()) {
+        Mix_PlayChannel(-1, soundMap[id], 0);
+    }
 }
 
-void SoundManager::StopMusic() {
+
+
+void SoundManager::stopMusic() {
     Mix_HaltMusic();
 }
 
-bool SoundManager::LoadEffect(const std::string& id, const std::string& fileName) {
-    Mix_Chunk* effect = Mix_LoadWAV(fileName.c_str());
-    if (!effect) {
-        std::cerr << "Failed to load effect " << fileName << ": " << Mix_GetError() << std::endl;
-        return false;
+void SoundManager::clean() {
+    for (auto& m : musicMap) {
+        Mix_FreeMusic(m.second);
     }
-    effects[id] = effect;
-    return true;
+    musicMap.clear();
+    for (auto& s : soundMap) {
+    Mix_FreeChunk(s.second);
 }
-
-void SoundManager::PlayEffect(const std::string& id) {
-    if (effects.count(id)) {
-        Mix_PlayChannel(-1, effects[id], 0);
-    }
+    soundMap.clear();
+    Mix_CloseAudio();
 }
-

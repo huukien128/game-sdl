@@ -42,8 +42,12 @@
 		<Unit filename="FontManager.h" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.h" />
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
+		<Unit filename="SoundManager.cpp" />
+		<Unit filename="SoundManager.h" />
 		<Unit filename="TextureManager.cpp" />
 		<Unit filename="TextureManager.h" />
 		<Unit filename="main.cpp" />

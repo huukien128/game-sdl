@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "TextureManager.h"
 #include <algorithm>
-
+#include"SoundManager.h"
 Player::Player(SDL_Renderer* renderer)
     : renderer(renderer), rect{300, 500, 75, 75}, speed(80) {
     texture = TextureManager::LoadTexture(renderer, "image/player.png");
@@ -17,6 +17,7 @@ void Player::handleInput(const SDL_Event& event) {
                 rect.x += speed;
                 break;
             case SDLK_SPACE:
+
                 fire();
                 break;
         }
@@ -46,6 +47,7 @@ void Player::render(SDL_Renderer* renderer) {
 
 void Player::fire() {
     bullets.push_back(new Bullet(renderer, rect.x + rect.w/5.5 , rect.y));
+     SoundManager::getInstance().playSound("shoot");
 }
 
 SDL_Rect Player::getRect() const {

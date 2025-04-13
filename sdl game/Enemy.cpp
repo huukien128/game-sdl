@@ -4,15 +4,19 @@
 #include<algorithm>
 
 Enemy::Enemy(SDL_Renderer* renderer, int x, int y)
-    : renderer(renderer), speed(3), direction(1) {
+    : renderer(renderer), speed(3), x_direction(1) , y_direction(0){
     texture = TextureManager::LoadTexture(renderer, "image/enemy2.png");
     rect = {x, y, 80, 80};
 }
 
 void Enemy::update() {
-    rect.x += direction * speed;
-    if (rect.x < 0 || rect.x > 800) {
-        reverseDirection();
+    rect.x += x_direction * speed;
+    rect.y += x_direction * speed/2;
+    if (rect.x+rect.w <0 || rect.x+rect.w > 880) {
+        reverseXDirection();
+    }
+     if (rect.y+rect.h <500 || rect.y+rect.h >600) {
+        reverseYDirection();
     }
 
     for (Bomb* bomb : bombs) {
@@ -36,13 +40,16 @@ void Enemy::render(SDL_Renderer* renderer) {
 }
 
 void Enemy::resetPosition() {
-    rect.x = rand() % 500 + 250;
+    rect.x = rand() % 720;
     rect.y = rand() % 350     ;
 
 }
 
-void Enemy::reverseDirection() {
-    direction = -direction;
+void Enemy::reverseXDirection() {
+    x_direction = -x_direction;
+}
+void Enemy::reverseYDirection() {
+    y_direction = -y_direction;
 }
 
 SDL_Rect Enemy::getRect() const {

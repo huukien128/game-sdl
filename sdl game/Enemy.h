@@ -11,7 +11,8 @@ public:
     void update();
     void render(SDL_Renderer* renderer);
     void resetPosition();
-    void reverseDirection();
+    void reverseXDirection();
+    void reverseYDirection();
     SDL_Rect getRect() const;
 
     void dropBomb();
@@ -23,7 +24,10 @@ private:
     SDL_Texture* texture;
     SDL_Rect rect;
     int speed;
-    int direction;
+    int x_direction;
+     int y_direction;
+
+
     std::vector<Bomb*> bombs;
 };
 

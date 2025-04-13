@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1744470530 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.cpp
+1744550759 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.cpp
 	"Game.h"
 	"TextureManager.h"
 	<iostream>
@@ -7,15 +7,17 @@
 	<SDL_image.h>
 	"FontManager.h"
 	<fstream>
+	"SoundManager.h"
 
-1744469372 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.h
+1744547656 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.h
 	<SDL.h>
 	<vector>
 	"Player.h"
 	"Enemy.h"
 	<SDL_ttf.h>
+	<string>
 
-1744261816 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\main.cpp
+1744510892 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\main.cpp
 	"Game.h"
 
 1744348961 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.h
@@ -23,18 +25,19 @@
 	<vector>
 	"Bullet.h"
 
-1744450005 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.cpp
+1744521165 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.cpp
 	"Enemy.h"
 	"TextureManager.h"
 	<cstdlib>
 	<algorithm>
 
-1744451670 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.cpp
+1744542294 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.cpp
 	"Player.h"
 	"TextureManager.h"
 	<algorithm>
+	"SoundManager.h"
 
-1744261816 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.h
+1744517653 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.h
 	<SDL.h>
 	<vector>
 	"Bomb.h"
@@ -54,7 +57,7 @@
 	"Bullet.h"
 	"TextureManager.h"
 
-1744261816 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bullet.h
+1744512541 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bullet.h
 	<SDL.h>
 
 1744261816 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\texturemanager.cpp
@@ -71,13 +74,20 @@
 	<SDL.h>
 	<string>
 
-1744471659 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\soundmanager.cpp
+1744543030 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\soundmanager.cpp
 	"SoundManager.h"
 	<iostream>
-	<map>
 
-1744471676 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\soundmanager.h
+1744543030 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\soundmanager.h
 	<SDL_mixer.h>
 	<string>
 	<map>
+
+1744551476 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\menu.h
+	<SDL.h>
+	<SDL_ttf.h>
+	"FontManager.h"
+
+1744546492 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\menu.cpp
+	"Menu.h"
 

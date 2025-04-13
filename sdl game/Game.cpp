@@ -5,9 +5,19 @@
 #include<SDL_image.h>
 #include "FontManager.h"
 #include <fstream>
+#include "SoundManager.h"
 
-Game::Game() : window(nullptr), renderer(nullptr), backgroundTexture(nullptr), running(false), player(nullptr),score(0), highScore(0),
-    scoreTexture(nullptr), highScoreTexture(nullptr) {}
+Game::Game()
+    : window(nullptr), renderer(nullptr),
+      background_ids(), backgroundTextures(),
+      current_stage(0), background_scroll(0), scroll_speed(1),
+      running(false), player(nullptr),
+      score(0), highScore(0),font(nullptr),
+       scoreTexture(nullptr),
+      highScoreTexture(nullptr),
+      gameOverFont(nullptr),
+      isGameOver(false) {}
+
 
 Game::~Game() {
     clean();
@@ -17,21 +27,31 @@ bool Game::init(const char* title, int width, int height) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) return false;
     if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG))) return false;
     if (TTF_Init() == -1) return false;
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) return false;
      loadHighScore();
 
     window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC);
 
-    backgroundTexture = TextureManager::LoadTexture(renderer, "image/bgr2.png");
+    background_ids = {"bgr1", "bgr2", "bgr3"};
+    backgroundTextures.push_back(TextureManager::LoadTexture(renderer, "image/bgr.png"));
+    backgroundTextures.push_back(TextureManager::LoadTexture(renderer, "image/bgr2.png"));
+    backgroundTextures.push_back(TextureManager::LoadTexture(renderer, "image/bgr3.png"));
     player = new Player(renderer);
 
-    for (int i = 0; i < 10; ++i) {
-        int x = rand() % 650;
-        int y = rand() % 200;
+    for (int i = 0; i < 12; ++i) {
+        int x = rand() % 800;
+        int y = rand() %250;
         enemies.push_back(new Enemy(renderer, x, y));
     }
     font = FontManager::LoadFont("Font/font.ttf", 15);
     gameOverFont = FontManager::LoadFont("Font/font2.ttf", 48);
+    SoundManager::getInstance().loadMusic("bgm", "sound/bgr.mp3");
+    SoundManager::getInstance().playMusic("bgm", -1);
+    SoundManager::getInstance().loadSound("explosion", "sound/exp.wav");
+    SoundManager::getInstance().loadSound("shoot", "sound/shoot.wav");
+    SoundManager::getInstance().loadSound("hit", "sound/hit.mp3");
+
     running = true;
     return true;
 }
@@ -48,7 +68,7 @@ void Game::update() {
     player->update();
 
     for (Enemy* enemy : enemies) {
-        if (rand() % 10000 < 23) enemy->dropBomb();
+        if (rand() % 10000 < 25) enemy->dropBomb();
         enemy->update();
 
         for (Bomb* bomb : enemy->getBombs()) {
@@ -56,6 +76,7 @@ void Game::update() {
                 SDL_Rect bombRect = bomb->getRect();
           if (SDL_HasIntersection(&playerRect, &bombRect)) {
                 std::cout << "Player destroyed! Game Over!" << std::endl;
+                 SoundManager::getInstance().playSound("explosion");
                 isGameOver = true;
                 running = false;
             }
@@ -67,6 +88,7 @@ void Game::update() {
                 SDL_Rect bulletRect = bullet->getRect();
                 SDL_Rect enemyRect = enemy->getRect();
            if (SDL_HasIntersection(&bulletRect, &enemyRect)) {
+                SoundManager::getInstance().playSound("hit");
                 player->removeBullet(bullet);
                 enemy->resetPosition();
                  score += 10;
@@ -77,11 +99,22 @@ void Game::update() {
             }
         }
     }
-}
+  background_scroll += scroll_speed;
+    if (background_scroll >= 600) {
+        background_scroll = 0;
+    }
+    int new_stage = score / 300;
 
+    current_stage = new_stage % backgroundTextures.size();
+}
 void Game::render() {
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
+   SDL_Rect dest1 = {0, background_scroll, 800, 600};
+   SDL_Rect dest2 = {0, background_scroll - 600, 800, 600};
+
+SDL_RenderCopy(renderer, backgroundTextures[current_stage], NULL, &dest1);
+SDL_RenderCopy(renderer, backgroundTextures[current_stage], NULL, &dest2);
+
     player->render(renderer);
 
     for (Enemy* enemy : enemies) {
@@ -154,7 +187,10 @@ void Game::clean() {
     if (scoreTexture) SDL_DestroyTexture(scoreTexture);
     if (highScoreTexture) SDL_DestroyTexture(highScoreTexture);
     FontManager::CloseFont(font);
-    SDL_DestroyTexture(backgroundTexture);
+    SoundManager::getInstance().clean();
+    for (auto& tex : backgroundTextures) {
+    SDL_DestroyTexture(tex);
+}
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

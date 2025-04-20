@@ -3,7 +3,7 @@
 #include <algorithm>
 #include"SoundManager.h"
 Player::Player(SDL_Renderer* renderer)
-    : renderer(renderer), rect{300, 500, 75, 75}, speed(80) {
+    : renderer(renderer), rect{300, 500, 75, 75}, speed(50) {
     texture = TextureManager::LoadTexture(renderer, "image/player.png");
 }
 
@@ -16,17 +16,31 @@ void Player::handleInput(const SDL_Event& event) {
             case SDLK_RIGHT:
                 rect.x += speed;
                 break;
+            case SDLK_UP:
+                rect.y -= speed;
+                break;
+            case SDLK_DOWN:
+                rect.y += speed;
+                break;
             case SDLK_SPACE:
-
                 fire();
                 break;
         }
+    }
+    else if (event.type == SDL_MOUSEBUTTONDOWN) {
+        if (event.button.button == SDL_BUTTON_LEFT) {
+            fire();
+        }
+    }
+    else if (event.type == SDL_MOUSEMOTION) {
+        rect.x = event.motion.x - rect.w / 2;
+        rect.y = event.motion.y - rect.h / 2;
     }
 }
 
 void Player::update() {
     if (rect.x < 0) rect.x = 0;
-    if (rect.x > 750) rect.x = 750;
+    if (rect.x > 800) rect.x = 800;
 
     for (size_t i = 0; i < bullets.size(); ++i) {
         bullets[i]->update();

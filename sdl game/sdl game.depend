@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1744550759 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.cpp
+1745164526 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.cpp
 	"Game.h"
 	"TextureManager.h"
 	<iostream>
@@ -8,16 +8,19 @@
 	"FontManager.h"
 	<fstream>
 	"SoundManager.h"
+	"Enemy.h"
+	"Bomb.h"
 
-1744547656 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.h
+1745162976 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\game.h
 	<SDL.h>
 	<vector>
 	"Player.h"
 	"Enemy.h"
+	"Menu.h"
 	<SDL_ttf.h>
 	<string>
 
-1744510892 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\main.cpp
+1745070213 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\main.cpp
 	"Game.h"
 
 1744348961 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.h
@@ -25,24 +28,24 @@
 	<vector>
 	"Bullet.h"
 
-1744521165 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.cpp
+1745075141 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.cpp
 	"Enemy.h"
 	"TextureManager.h"
 	<cstdlib>
 	<algorithm>
 
-1744542294 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.cpp
+1744624231 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\player.cpp
 	"Player.h"
 	"TextureManager.h"
 	<algorithm>
 	"SoundManager.h"
 
-1744517653 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.h
+1744604931 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\enemy.h
 	<SDL.h>
 	<vector>
 	"Bomb.h"
 
-1744451209 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bomb.cpp
+1744603138 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bomb.cpp
 	"Bomb.h"
 	"TextureManager.h"
 
@@ -53,7 +56,7 @@
 	<SDL.h>
 	<string>
 
-1744451186 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bullet.cpp
+1744603068 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\bullet.cpp
 	"Bullet.h"
 	"TextureManager.h"
 
@@ -83,11 +86,11 @@
 	<string>
 	<map>
 
-1744551476 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\menu.h
+1745161612 c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\menu.h
 	<SDL.h>
-	<SDL_ttf.h>
-	"FontManager.h"
 
-1744546492 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\menu.cpp
+1745164812 source:c:\users\asus\onedrive\pictures\documents\github\game-sdl\sdl game\menu.cpp
 	"Menu.h"
+	"FontManager.h"
+	<iostream>
 

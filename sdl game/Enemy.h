@@ -14,6 +14,7 @@ public:
     void reverseXDirection();
     void reverseYDirection();
     SDL_Rect getRect() const;
+    void setSpeed(float s);
 
     void dropBomb();
     std::vector<Bomb*>& getBombs();

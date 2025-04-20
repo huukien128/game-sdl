@@ -68,3 +68,7 @@ void Enemy::clearBombs() {
     for (Bomb* bomb : bombs) delete bomb;
     bombs.clear();
 }
+void Enemy::setSpeed(float s) {
+    speed = s;
+}
+

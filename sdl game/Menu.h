@@ -1,0 +1,46 @@
+#ifndef MENU_H
+#define MENU_H
+
+#include <SDL.h>
+
+class Menu {
+public:
+    Menu(SDL_Renderer* renderer);
+    ~Menu();
+
+    void handleEvents(SDL_Event& event);
+    void render();
+    void reset();
+
+    bool isPlayAgainSelected() const { return playAgainSelected; }
+    bool isExitSelected() const { return exitSelected; }
+    bool isStartGameSelected() const { return startGameSelected; }
+    bool isHowToPlaySelected() const { return howToPlaySelected; }
+
+    void setGameOverMenu(bool value);
+
+private:
+    SDL_Renderer* renderer;
+
+    SDL_Texture* playAgainTexture;
+    SDL_Texture* exitTexture;
+    SDL_Texture* startGameTexture;
+    SDL_Texture* howToPlayTexture;
+
+    SDL_Rect playAgainRect;
+    SDL_Rect exitRect;
+    SDL_Rect startGameRect;
+    SDL_Rect howToPlayRect;
+
+    bool playAgainSelected;
+    bool exitSelected;
+    bool startGameSelected;
+    bool howToPlaySelected;
+
+    bool isGameOverMenu;
+
+    void loadMenuItems();
+    void freeTextures();
+};
+
+#endif

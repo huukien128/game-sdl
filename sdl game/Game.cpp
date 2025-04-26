@@ -98,7 +98,7 @@ void Game::update() {
     level = 1 + (score / 500);
 
     for (Enemy* enemy : enemies) {
-        if (rand() % 10000 < 5) {
+        if (rand() % 10000 < 15) {
             enemy->dropBomb();
         }
         enemy->update();
@@ -106,6 +106,11 @@ void Game::update() {
         for (Bomb* bomb : enemy->getBombs()) {
             SDL_Rect playerRect = player->getRect();
             SDL_Rect bombRect = bomb->getRect();
+              playerRect.x += 25;
+              playerRect.y += 25;
+              playerRect.w -= 50;
+              playerRect.h -= 50;
+
             if (SDL_HasIntersection(&playerRect, &bombRect)) {
                 std::cout << "Player destroyed! Game Over!" << std::endl;
                 SoundManager::getInstance().playSound("explosion");
@@ -201,6 +206,13 @@ void Game::saveHighScore() {
     }
 }
 
+void Game::onGameOver() {
+    if (score > highScore) {
+        highScore = score;
+    }
+    saveHighScore();  // Save high score when the game is over
+}
+
 void Game::restartGame() {
     score = 0;
     isGameOver = false;
@@ -215,11 +227,13 @@ void Game::restartGame() {
     }
     enemies.clear();
 
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < 10; ++i) {
         int x = rand() % 720;
-        int y = rand() % 350;
+        int y = rand() % 200;
         enemies.push_back(new Enemy(renderer, x, y));
     }
+
+    saveHighScore();
 }
 
 void Game::clean() {
@@ -247,6 +261,9 @@ void Game::clean() {
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+
+    saveHighScore();
+
     SDL_Quit();
 }
 

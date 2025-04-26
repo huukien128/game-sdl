@@ -26,11 +26,15 @@ private:
     SDL_Texture* exitTexture;
     SDL_Texture* startGameTexture;
     SDL_Texture* howToPlayTexture;
+    SDL_Texture* menuBackground;
+    SDL_Texture* howToPlayImage;
+    SDL_Texture* backTexture;
 
     SDL_Rect playAgainRect;
     SDL_Rect exitRect;
     SDL_Rect startGameRect;
     SDL_Rect howToPlayRect;
+    SDL_Rect backRect;
 
     bool playAgainSelected;
     bool exitSelected;
@@ -38,6 +42,7 @@ private:
     bool howToPlaySelected;
 
     bool isGameOverMenu;
+    bool showHowToPlay;
 
     void loadMenuItems();
     void freeTextures();

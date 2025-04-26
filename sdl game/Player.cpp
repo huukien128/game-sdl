@@ -3,7 +3,7 @@
 #include <algorithm>
 #include"SoundManager.h"
 Player::Player(SDL_Renderer* renderer)
-    : renderer(renderer), rect{300, 500, 75, 75}, speed(50) {
+    : renderer(renderer), rect{300, 500, 85, 85}, speed(70) {
     texture = TextureManager::LoadTexture(renderer, "image/player.png");
 }
 
@@ -26,15 +26,6 @@ void Player::handleInput(const SDL_Event& event) {
                 fire();
                 break;
         }
-    }
-    else if (event.type == SDL_MOUSEBUTTONDOWN) {
-        if (event.button.button == SDL_BUTTON_LEFT) {
-            fire();
-        }
-    }
-    else if (event.type == SDL_MOUSEMOTION) {
-        rect.x = event.motion.x - rect.w / 2;
-        rect.y = event.motion.y - rect.h / 2;
     }
 }
 
@@ -60,7 +51,7 @@ void Player::render(SDL_Renderer* renderer) {
 }
 
 void Player::fire() {
-    bullets.push_back(new Bullet(renderer, rect.x + rect.w/5.5 , rect.y));
+    bullets.push_back(new Bullet(renderer, rect.x + rect.w/3.3 , rect.y));
      SoundManager::getInstance().playSound("shoot");
 }
 

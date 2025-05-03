@@ -6,6 +6,15 @@
 #include "Bomb.h"
 
 class Enemy {
+
+private:
+    SDL_Renderer* renderer;
+    SDL_Texture* texture;
+    SDL_Rect rect;
+    int speed;
+    int x_direction;
+    int y_direction;
+    std::vector<Bomb*> bombs;
 public:
     Enemy(SDL_Renderer* renderer, int x, int y);
     void update();
@@ -15,21 +24,10 @@ public:
     void reverseYDirection();
     SDL_Rect getRect() const;
     void setSpeed(float s);
-
     void dropBomb();
     std::vector<Bomb*>& getBombs();
     void clearBombs();
 
-private:
-    SDL_Renderer* renderer;
-    SDL_Texture* texture;
-    SDL_Rect rect;
-    int speed;
-    int x_direction;
-     int y_direction;
-
-
-    std::vector<Bomb*> bombs;
 };
 
 #endif

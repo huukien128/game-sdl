@@ -10,17 +10,6 @@
 #include <string>
 
 class Game {
-public:
-    Game();
-    ~Game();
-    bool init(const char* title, int width, int height);
-    void handleEvents();
-    void update();
-    void render();
-    void clean();
-    void onGameOver();
-    bool isRunning();
-
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;
@@ -43,9 +32,20 @@ private:
     bool isGameOver;
     int level;
 
+public:
+    Game();
+    ~Game();
+    bool init(const char* title, int width, int height);
+    void handleEvents();
+    void update();
+    void render();
+    void clean();
+    void onGameOver();
+    bool isRunning();
     void loadHighScore();
     void saveHighScore();
     void restartGame();
+
 };
 
 #endif

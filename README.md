@@ -3,7 +3,7 @@
 ## Thông tin sinh viên
 
 - **Họ tên:** Nguyễn Hữu Kiên  
-- **Mã số sinh viên:** 24022807
+- **Mã sinh viên:** 24022807
 
 ## Logic game
 

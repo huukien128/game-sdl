@@ -1,11 +1,14 @@
 # Cosmic Shooter
 
-Cosmic Shooter là một trò chơi bắn súng không gian 2D được lập trình bằng C++ sử dụng thư viện SDL2. Trong game, người chơi điều khiển một phi thuyền chiến đấu chống lại các đợt tấn công của kẻ địch trong không gian. Trò chơi có hệ thống điểm số, lưu high score, chuyển màn, menu điều khiển và hiệu ứng âm thanh sống động.
-
 ## Thông tin sinh viên
 
 - **Họ tên:** Nguyễn Hữu Kiên  
 - **Mã số sinh viên:** 24022807
+
+## Logic game
+
+Cosmic Shooter là một trò chơi bắn súng không gian 2D được lập trình bằng C++ sử dụng thư viện SDL2. Trong game, người chơi điều khiển một phi thuyền chiến đấu chống lại các đợt tấn công của kẻ địch trong không gian. Trò chơi có hệ thống điểm số, lưu high score, chuyển màn, menu điều khiển và hiệu ứng âm thanh sống động.
+
 
 ## Tính năng chính
 

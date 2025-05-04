@@ -7,7 +7,7 @@ Cosmic Shooter là một trò chơi bắn súng không gian 2D được lập tr
 - **Họ tên:** Nguyễn Hữu Kiên  
 - **Mã số sinh viên:** 24022807
 
-## Điểm số mong muốn 8.5-9.
+# Điểm số mong muốn 8.5-9.
 
 ## Tính năng chính
 

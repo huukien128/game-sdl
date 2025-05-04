@@ -98,7 +98,7 @@ void Game::update() {
     level = 1 + (score / 500);
 
     for (Enemy* enemy : enemies) {
-        if (rand() % 10000 < 15) {
+        if (rand() % 10000 < (15+level*10)) {
             enemy->dropBomb();
         }
         enemy->update();
@@ -210,7 +210,7 @@ void Game::onGameOver() {
     if (score > highScore) {
         highScore = score;
     }
-    saveHighScore();  // Save high score when the game is over
+    saveHighScore();
 }
 
 void Game::restartGame() {
@@ -227,7 +227,7 @@ void Game::restartGame() {
     }
     enemies.clear();
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 12; ++i) {
         int x = rand() % 720;
         int y = rand() % 200;
         enemies.push_back(new Enemy(renderer, x, y));

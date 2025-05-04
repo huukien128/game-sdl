@@ -15,7 +15,7 @@ void Enemy::update() {
     if (rect.x+rect.w <0 || rect.x+rect.w > 880) {
         reverseXDirection();
     }
-     if (rect.y+rect.h <500 || rect.y+rect.h >600) {
+     if (rect.y+rect.h <600 || rect.y+rect.h >700) {
         reverseYDirection();
     }
 
@@ -41,7 +41,7 @@ void Enemy::render(SDL_Renderer* renderer) {
 
 void Enemy::resetPosition() {
     rect.x = rand() % 720;
-    rect.y = rand() % 350     ;
+    rect.y = rand() % 200;
 
 }
 

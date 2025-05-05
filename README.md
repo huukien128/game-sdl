@@ -5,9 +5,22 @@
 - **Họ tên:** Nguyễn Hữu Kiên  
 - **Mã sinh viên:** 24022807
 
-## Logic game
+ ## Giới thiệu chủ đề game
 
 Cosmic Shooter là một trò chơi bắn súng không gian 2D được lập trình bằng C++ sử dụng thư viện SDL2. Trong game, người chơi điều khiển một phi thuyền chiến đấu chống lại các đợt tấn công của kẻ địch trong không gian. Trò chơi có hệ thống điểm số, lưu high score, chuyển màn, menu điều khiển và hiệu ứng âm thanh sống động.
+
+
+## Ngưỡng điểm đề xuất **8.0** điểm.
+
+
+## Lý do bảo vệ ngưỡng điểm 8.0
+
+- Hoàn thiện đầy đủ chức năng cơ bản: Di chuyển, bắn đạn, tiêu diệt kẻ địch, kết thúc game khi người chơi bị trúng bom.
+- Có menu và hướng dẫn cách chơi: Giao diện menu gồm các lựa chọn "Start Game", "How to Play", "Exit Game".
+- Hiển thị điểm số và high score: Điểm số được cập nhật liên tục và high score được lưu lại qua các lần chơi.
+- Cấu trúc mã nguồn rõ ràng: Mã nguồn được chia thành các file riêng biệt như `Player`, `Enemy`, `Bullet`, `Menu`, `Game`, `TextureManager`, v.v.
+- Có tính mở rộng: Game có hệ thống level và độ khó tăng theo thời gian.
+- Tích hợp âm thanh cơ bản: Có hiệu ứng khi bắn, nổ, và nhạc nền đơn giản.
 
 
 ## Tính năng chính

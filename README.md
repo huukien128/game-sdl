@@ -32,11 +32,6 @@ Cosmic Shooter là một trò chơi bắn súng không gian 2D được lập tr
 - Giao diện menu chính: Start Game, How to Play, Exit
 - Hiệu ứng âm thanh và đồ họa sinh động
 
-## Yêu cầu hệ thống
-
-- Hệ điều hành: Windows (khuyến nghị), hoặc Linux
-- Phần mềm: Code::Blocks (hoặc IDE khác hỗ trợ C++)
-- Thư viện: SDL2, SDL2_image, SDL2_ttf, SDL2_mixer
 
 ## Hướng dẫn cài đặt và chạy (Windows + Code::Blocks)
 
